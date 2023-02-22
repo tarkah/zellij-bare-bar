@@ -1,0 +1,12 @@
+[package]
+name = "bare-bar"
+version = "0.1.0"
+authors = ["tarkah <admin@tarkah.dev>"]
+edition = "2021"
+license = "MIT"
+
+[dependencies]
+ansi_term = "0.12"
+unicode-width = "0.1.8"
+zellij-tile = "0.34"
+zellij-tile-utils = "0.34"
