@@ -23,14 +23,13 @@ cargo build --release
 cp ./target/wasm32-wasi/release/bare-bar.wasm $HOME/.local/share/zellij/plugins/
 ```
 
-Add plugin to one of your layouts. Path must be absolute, there seems to be a bug 
-preventing relative path plugin name.
+Add plugin to one of your layouts.
 
 ```kdl
 layout {
     pane
     pane size=1 borderless=true {
-        plugin location="file:///home/<user>/.local/share/zellij/plugins/bare-bar.wasm"
+        plugin location="file:bare-bar.wasm"
     }
 }
 ```
