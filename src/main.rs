@@ -1,3 +1,5 @@
+use std::collections::BTreeMap;
+
 use unicode_width::UnicodeWidthStr;
 use zellij_tile::prelude::*;
 use zellij_tile_utils::style;
@@ -18,7 +20,7 @@ struct State {
 register_plugin!(State);
 
 impl ZellijPlugin for State {
-    fn load(&mut self) {
+    fn load(&mut self, _configuration: BTreeMap<String, String>) {
         set_selectable(false);
         subscribe(&[EventType::TabUpdate, EventType::ModeUpdate]);
     }
