@@ -21,8 +21,16 @@ register_plugin!(State);
 
 impl ZellijPlugin for State {
     fn load(&mut self, _configuration: BTreeMap<String, String>) {
-        set_selectable(false);
-        subscribe(&[EventType::TabUpdate, EventType::ModeUpdate]);
+        set_selectable(true);
+        request_permission(&[
+            PermissionType::ReadApplicationState,
+            PermissionType::ChangeApplicationState,
+        ]);
+        subscribe(&[
+            EventType::TabUpdate,
+            EventType::ModeUpdate,
+            EventType::PermissionRequestResult,
+        ]);
     }
 
     fn update(&mut self, event: Event) -> bool {
@@ -37,9 +45,11 @@ impl ZellijPlugin for State {
                 self.tabs = tabs;
                 return true;
             }
-            _ => {
-                eprintln!("Got unrecognized event: {:?}", event);
+            Event::PermissionRequestResult(PermissionStatus::Granted) => {
+                set_selectable(false);
+                return true;
             }
+            _ => {}
         }
         false
     }
